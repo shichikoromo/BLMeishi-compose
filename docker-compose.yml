@@ -4,7 +4,7 @@ services:
     image: openjdk:15
     container_name: app
     ports:
-      - 8080:8080
+      - "8080:8080"
     tty: true
     volumes:
       - ./twitter-service:/srv:cached
