@@ -3,18 +3,15 @@ package com.ayasakinui.twitterservice.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 import javax.annotation.PostConstruct;
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/twitter")
@@ -40,31 +37,26 @@ public class TwitterController {
         return out;
     }
 
-    @RequestMapping("success")
-    public String success() {
-        return "success!!";
-    }
-
-    @RequestMapping(value = "test",method=RequestMethod.GET)
-    public String test() throws Exception {
+    @RequestMapping(value = "oauth")
+    public RedirectView oauth() throws Exception {
         String callbackURL = "http://localhost:8080/twitter/success";
         RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL);
-
-        AccessToken accessToken = null;
-        String url = requestToken.getAuthorizationURL();
-        System.out.println(requestToken.getAuthorizationURL());
-        while (null == accessToken) {
-            try {
-                Desktop.getDesktop().browse(new URI(requestToken.getAuthorizationURL()));
-            } catch (UnsupportedOperationException ignore) {
-            } catch (IOException ignore) {
-            } catch (URISyntaxException e) {
-                throw new AssertionError(e);
-            }
-        }
-
-        return "redirect:"+url;
+        return new RedirectView(requestToken.getAuthorizationURL());
     }
+
+    @RequestMapping("success")
+    public String success(@RequestParam String oauth_token, @RequestParam String oauth_verifier) throws Exception{
+        twitter.setOAuthAccessToken(new AccessToken(oauth_token,oauth_verifier));
+
+        String success = "success!!<br><br>"+
+                "<b>twitter: </b><br>" + String.valueOf(twitter) + "<br><br>" +
+                "<b>twitter: </b><br>" + String.valueOf(twitter) + "<br><br>" +
+                "<b>oauth_token:</b>  " + oauth_token +  "<br><br>" +
+                "<b>oauth_verifier: </b> " + oauth_verifier + "<br><br>"; // +
+                //"<b>Screen Name: </b> " +twitter.verifyCredentials().getScreenName();
+        return success;
+    }
+
     /*
     public User user() throws Exception {
         User user = twitter.verifyCredentials();
