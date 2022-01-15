@@ -1,18 +1,18 @@
 package com.ayasakinui.twitterservice.controller;
 
 
-import com.ayasakinui.twitterservice.repository.UserRepository;
+import com.ayasakinui.twitterservice.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
+public class MemberController {
 
-    private final UserRepository repository;
+    private final MemberRepository repository;
 
     @Autowired
-    public UserController(UserRepository repository) {
+    public MemberController(MemberRepository repository) {
         this.repository = repository;
     }
 
