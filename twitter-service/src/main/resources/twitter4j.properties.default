@@ -1,0 +1,3 @@
+debug=true
+oauth.consumerKey={api-key}
+oauth.consumerSecret={api-secret-key}
