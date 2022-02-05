@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Login Form | CodingLab </title>--->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="container">
+ 
+        <div class="title"><span th:text="${dom.name}">最強同盟</span></div>
+        <div class="side">
+
+          <img class="banner" src="th:href="@{banner/{domId}(domID=${dom.id})} th:text="${dom.id}">
+       
+      
+           <div class="infoBox">
+             <div class="count"><span th:text="${num}">X</span>人</div>
+             <br>
+        <a href="" class="btn btn--yellow btn--cubic">同盟に参加</a>
+      </div>
+       </div>
+      <div class="description clear_box">
+        <span th:text="${dom.description}">最強ズが大好きな人たちの同盟です。ふたりが好きならカプ有り無しや受け攻めは不問です！！</span>
+      </div>
+      <img class="icon" src="th:href="@{iconURL)} th:text="${members.id}">
+        <a href="th:href="@{page/{memberID}.html(memberID=${members.id})} th:text="${members.id}"></a>
+    </div>
+  </body>
+</html>
+
