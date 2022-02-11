@@ -1,9 +1,9 @@
-package com.ayasakinui.twitterservice.entity;
+package com.ayasakinui.twitterservice.dataAccess.entity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "members")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +12,7 @@ public class Member {
     private String twitter_id;
     private String access_token;
     private String access_secret;
+    private String icon;
 
 
     public Member() {
@@ -21,11 +22,12 @@ public class Member {
         this.name = name;
     }
 
-    public Member(String name, String twitter_id, String access_token, String oauth_verifier) {
+    public Member(String name, String twitter_id, String access_token, String oauth_verifier, String icon) {
         this.name = name;
         this.twitter_id = twitter_id;
         this.access_token = access_token;
         this.access_secret = oauth_verifier;
+        this.icon = icon;
     }
 
     public Long getId() {
@@ -46,6 +48,10 @@ public class Member {
 
     public String getAccess_secret() {
         return access_secret;
+    }
+
+    public String getIcon(){
+        return icon;
     }
 
     public void setId(Long id) {
@@ -70,6 +76,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return String.format("{id:%d,name:%s, twitter_id:%s, access_token:%s, access_secret:%s}", id, name, twitter_id, access_token, access_token);
+        return String.format("{id:%d,name:%s, twitter_id:%s, access_token:%s, access_secret:%s, icon:%s}"
+        , id, name, twitter_id, access_token, access_token, icon);
     }
 }
