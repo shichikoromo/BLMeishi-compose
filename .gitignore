@@ -8,3 +8,5 @@ docker/db/data
 .vs
 .vscode
 app\.gradle\*
+app/build.gradle
+gradle/wrapper/gradle-wrapper.jar
