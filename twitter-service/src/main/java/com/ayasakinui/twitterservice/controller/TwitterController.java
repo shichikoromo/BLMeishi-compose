@@ -1,7 +1,7 @@
 package com.ayasakinui.twitterservice.controller;
 
-import com.ayasakinui.twitterservice.entity.Member;
-import com.ayasakinui.twitterservice.repository.MemberRepository;
+import com.ayasakinui.twitterservice.dataAccess.entity.Member;
+import com.ayasakinui.twitterservice.dataAccess.repository.MemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
