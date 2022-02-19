@@ -22,11 +22,11 @@ public class Member {
         this.name = name;
     }
 
-    public Member(String name, String twitterId, String accessToken, String oauth_verifier, String icon) {
+    public Member(String name, String twitterId, String accessToken, String accessSecret, String icon) {
         this.name = name;
         this.twitterId = twitterId;
         this.accessToken = accessToken;
-        this.accessSecret = oauth_verifier;
+        this.accessSecret = accessSecret;
         this.icon = icon;
     }
 
@@ -76,7 +76,13 @@ public class Member {
 
     @Override
     public String toString() {
-        return String.format("{id:%d,name:%s, twitter_id:%s, access_token:%s, access_secret:%s, icon:%s}"
-        , id, name, twitterId, accessToken, accessToken, icon);
+        return "Member{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", twitterId='" + twitterId + '\'' +
+                ", accessToken='" + accessToken + '\'' +
+                ", accessSecret='" + accessSecret + '\'' +
+                ", icon='" + icon + '\'' +
+                '}';
     }
 }
