@@ -2,12 +2,10 @@ package com.ayasakinui.twitterservice.controller;
 
 import com.ayasakinui.twitterservice.dataAccess.entity.Member;
 import com.ayasakinui.twitterservice.dataAccess.repository.MemberRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.ayasakinui.twitterservice.service.TwitterOath;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.User;
@@ -21,9 +19,7 @@ import javax.annotation.PostConstruct;
 @RequestMapping("/twitter")
 public class TwitterController {
 
-    private static final Logger log = LoggerFactory.getLogger(TwitterController.class);
-    private static final String CONSUMER_KEY = "8Af9X5ECCCgjsAguLdQpRXmn0";
-    private static final String CONSUMER_SECRET = "R8xDnUmnbPm5TcRog0i2XGwMBvLsNCTNEahmsXzBONSJawiiZZ";
+    //private static final Logger log = LoggerFactory.getLogger(TwitterController.class);
 
     private static String ACCES_TOKEN = null;
     private static String ACCES_SECRET = null;
@@ -32,6 +28,8 @@ public class TwitterController {
 
     private Twitter twitter = TwitterFactory.getSingleton();;
     private RequestToken requestToken;
+
+    private TwitterOath twitterOath = new TwitterOath();
 
     public TwitterController(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -42,6 +40,7 @@ public class TwitterController {
         this.twitter = new TwitterFactory().getInstance();
     }
 
+    /*
     @RequestMapping("user")
     public String auth() throws Exception {
 
@@ -51,20 +50,19 @@ public class TwitterController {
         //"<b>twitter.getOAuthAccessToken(): </b><br>" + String.valueOf(twitter.getOAuthAccessToken());
 
         return out;
-    }
+    }*/
 
     @RequestMapping(value = "oauth")
-    public RedirectView oauth() throws Exception {
+    public String oauth() throws Exception {
+        //twitterOath.oauth();
+        /*
         String callbackURL = "http://localhost:8080/twitter/success";
         requestToken = twitter.getOAuthRequestToken(callbackURL);
 
-        //ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        //configurationBuilder.setOAuthConsumerKey(CONSUMER_KEY);
-        //configurationBuilder.setOAuthConsumerSecret(CONSUMER_SECRET);
-        //Configuration configuration = configurationBuilder.build();
-        //twitter = new TwitterFactory(configuration).getInstance();
-
         return new RedirectView(requestToken.getAuthenticationURL());
+
+         */
+        return "oauth";
     }
 
     @RequestMapping("success")
@@ -115,9 +113,9 @@ public class TwitterController {
     public String createUser(String name, String twitterId, String accesToken, String accessSecret) {
         Member member = new Member();
         member.setName(name);
-        member.setTwitter_id(twitterId);
-        member.setAccess_token(accesToken);
-        member.setAccess_secret(accessSecret);
+        member.setTwitterId(twitterId);
+        member.setAccessToken(accesToken);
+        member.setAccessSecret(accessSecret);
         memberRepository.save(member);
         return "createUser(): success!!<br>"+member;
     }

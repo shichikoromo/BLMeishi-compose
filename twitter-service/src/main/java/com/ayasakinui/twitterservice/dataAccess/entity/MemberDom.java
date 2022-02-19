@@ -1,6 +1,7 @@
 package com.ayasakinui.twitterservice.dataAccess.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "memberdoms")
@@ -10,7 +11,7 @@ public class MemberDom {
     private Long id;
     private Long memberId;
     private Long domId;
-
+    private Date createdAt;
 
     public MemberDom() {
     }
@@ -33,9 +34,9 @@ public class MemberDom {
         return memberId;
     }
 
-    public Long domId(){
-        return domId;
-    }
+    public Long getDomId() { return domId; }
+
+    public Date getCreatedAt() { return createdAt; }
 
     public void setId(Long id) {
         this.id = id;
@@ -49,9 +50,15 @@ public class MemberDom {
         this.domId = domId;
     }
 
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+
     @Override
     public String toString() {
-        return String.format("{id:%d,id:%s, memberId:%s, domId:%s}"
-        , id, id, memberId, domId);
+        return "MemberDom{" +
+                "id=" + id +
+                ", memberId=" + memberId +
+                ", domId=" + domId +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

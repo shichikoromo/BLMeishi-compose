@@ -1,14 +1,13 @@
 package com.ayasakinui.twitterservice.dataAccess.repository;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.ayasakinui.twitterservice.dataAccess.entity.*;
+import com.ayasakinui.twitterservice.dataAccess.entity.MemberDom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface MemberdomRepository extends JpaRepository<MemberDom, Long> {
+public interface MemberDomRepository extends JpaRepository<MemberDom, Long> {
     /*カスタムクエリ*/
     List<MemberDom> findBydomId(Long domId);
 }

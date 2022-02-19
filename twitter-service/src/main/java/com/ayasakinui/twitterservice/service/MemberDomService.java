@@ -1,31 +1,32 @@
 package com.ayasakinui.twitterservice.service;
 
-import java.net.http.WebSocket.Listener;
-import java.util.Optional;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
+import com.ayasakinui.twitterservice.dataAccess.entity.MemberDom;
+import com.ayasakinui.twitterservice.dataAccess.repository.MemberRepository;
+import com.ayasakinui.twitterservice.dataAccess.repository.MemberDomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ayasakinui.twitterservice.dataAccess.entity.*;
-import com.ayasakinui.twitterservice.dataAccess.repository.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
-public class memberdomService {
+public class MemberDomService {
     /**
    * ユーザー情報 Repository
    */
   @Autowired
-  private MemberdomRepository MemberdomRepository;  
+  private MemberDomRepository memberdomRepository;
+  private MemberRepository memberRepository;
+
 
     /**
    * dom ユーザー情報 
    * @return 検索結果
    */
   public List<Long> findMemberIds(Long domId) {
-        List<MemberDom> memberDomList= MemberdomRepository.findBydomId(domId); //domに所属するmemberを取得
+        List<MemberDom> memberDomList= memberdomRepository.findBydomId(domId); //domに所属するmemberを取得
          List<Long> memberIds = new ArrayList<Long>();
 
          for (int i=0; i<=memberDomList.size(); i++) {
@@ -39,7 +40,7 @@ public class memberdomService {
       List<Optional> memberList = new ArrayList<Optional>();
 
       for (int i=0; i<=memberIds.size(); i++) {
-        memberList.add(MemberRepository.findById(memberIds.get(i)));
+        memberList.add(memberRepository.findById(memberIds.get(i)));
     }
     return memberList;
   }

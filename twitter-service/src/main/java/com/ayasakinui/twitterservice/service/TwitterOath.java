@@ -1,5 +1,5 @@
 package com.ayasakinui.twitterservice.service;
 
-public class twitterOath {
+public class TwitterOath {
     
 }
